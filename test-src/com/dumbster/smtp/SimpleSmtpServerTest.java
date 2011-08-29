@@ -35,7 +35,7 @@ public class SimpleSmtpServerTest {
     private final String Server = "localhost";
     private final String From = "sender@here.com";
     private final String To = "receiver@there.com";
-    private final String Subject = "Test";
+    private final String Subject = "This is a very long subject line that should contain more than sixty-four characters";
     private final String Body = "Test Body";
     private final String FileName = "license.txt";
 
@@ -69,7 +69,7 @@ public class SimpleSmtpServerTest {
         server.anticipateMessageCountFor(1, WAIT_TICKS);
         assertTrue(server.getEmailCount() == 1);
         MailMessage email = server.getMessage(0);
-        assertEquals("Test", email.getFirstHeaderValue("Subject"));
+        assertEquals(Subject, email.getFirstHeaderValue("Subject"));
         assertEquals("Test Body", email.getBody());
     }
 
@@ -102,7 +102,7 @@ public class SimpleSmtpServerTest {
         server.anticipateMessageCountFor(1, WAIT_TICKS);
         assertTrue(server.getEmailCount() == 1);
         MailMessage email = server.getMessage(0);
-        assertEquals("Test", email.getFirstHeaderValue("Subject"));
+        assertEquals(Subject, email.getFirstHeaderValue("Subject"));
         assertEquals("Test Body", email.getBody());
     }
 
@@ -225,7 +225,7 @@ public class SimpleSmtpServerTest {
         server.anticipateMessageCountFor(2, WAIT_TICKS);
         assertEquals(2, server.getEmailCount());
         MailMessage email = server.getMessage(0);
-        assertEquals("Test", email.getFirstHeaderValue("Subject"));
+        assertEquals(Subject, email.getFirstHeaderValue("Subject"));
         assertEquals("Test Body", email.getBody());
     }
 
